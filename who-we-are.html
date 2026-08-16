@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who We Are — A&T Solutions</title>
+<meta name="description" content="A&T Solutions was founded by two lifelong friends who turned years of real-world operational experience into training that helps civilian communities prevent attacks and improve public safety.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0C0E10;
+    --bg-panel:#15181C;
+    --bg-panel-2:#1B1F23;
+    --ink:#ECE8E0;
+    --ink-muted:#9AA0A8;
+    --ink-faint:#5C6167;
+    --brass:#C6A15B;
+    --brass-bright:#E0BE7F;
+    --line:#2A2E33;
+    --line-soft:#1F2327;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .display{font-family:'Big Shoulders Display',sans-serif; font-weight:700; letter-spacing:0.01em; text-transform:uppercase;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  .narrow{max-width:760px;}
+
+  .grid-bg{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:64px 64px; opacity:0.35;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 75%);
+  }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(12,14,16,0.86); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .navbar{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
+  .brand{display:flex; align-items:baseline; gap:10px;}
+  .brand-mark{font-size:22px; letter-spacing:0.04em;}
+  .brand-mark span{color:var(--brass);}
+  .brand-sub{font-size:10px; letter-spacing:0.16em; color:var(--ink-faint); display:none;}
+  @media (min-width:640px){ .brand-sub{display:block;} }
+  nav.links{display:flex; gap:32px; align-items:center;}
+  nav.links a{
+    font-size:13px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--ink-muted); text-decoration:none; font-weight:500;
+    transition:color .2s ease;
+  }
+  nav.links a.active{color:var(--brass-bright);}
+  nav.links a:hover, nav.links a:focus-visible{color:var(--brass-bright);}
+  .nav-cta{border:1px solid var(--brass); color:var(--brass-bright) !important; padding:8px 16px; border-radius:2px;}
+  .nav-cta:hover{background:var(--brass); color:var(--bg) !important;}
+  .menu-btn{display:none; background:none; border:1px solid var(--line); color:var(--ink); padding:8px 10px; border-radius:2px;}
+  @media (max-width:820px){ nav.links{display:none;} .menu-btn{display:block;} }
+
+  /* HERO */
+  .phero{position:relative; z-index:1; padding:88px 0 56px;}
+  .eyebrow{font-size:12px; letter-spacing:0.2em; color:var(--brass); display:flex; align-items:center; gap:12px; margin-bottom:22px;}
+  .eyebrow::before{content:""; width:28px; height:1px; background:var(--brass);}
+  h1{font-size:clamp(36px, 5.6vw, 64px); line-height:1.0; margin:0 0 22px; max-width:18ch;}
+  .lede{font-size:18px; color:var(--ink-muted); max-width:62ch; margin:0 0 0;}
+
+  section{position:relative; z-index:1; padding:72px 0; border-top:1px solid var(--line-soft);}
+  .section-head{max-width:680px; margin-bottom:40px;}
+  .kicker{font-size:12px; letter-spacing:0.2em; color:var(--brass); margin-bottom:14px; display:block;}
+  h2{font-size:clamp(26px,3.6vw,38px); margin:0 0 16px; line-height:1.08;}
+  .section-head p{color:var(--ink-muted); font-size:16px; margin:0; max-width:56ch;}
+
+  /* pull quote / bracket frame */
+  .bracket-frame{position:relative; border:1px solid var(--line); background:var(--bg-panel); padding:40px;}
+  .bracket-frame::before, .bracket-frame::after,
+  .bracket-frame .bc2::before, .bracket-frame .bc2::after{
+    content:""; position:absolute; width:18px; height:18px;
+    border-color:var(--brass); border-style:solid; border-width:0;
+  }
+  .bracket-frame::before{top:-1px; left:-1px; border-top-width:2px; border-left-width:2px;}
+  .bracket-frame::after{top:-1px; right:-1px; border-top-width:2px; border-right-width:2px;}
+  .bracket-frame .bc2::before{bottom:-1px; left:-1px; border-bottom-width:2px; border-left-width:2px;}
+  .bracket-frame .bc2::after{bottom:-1px; right:-1px; border-bottom-width:2px; border-right-width:2px;}
+
+  .founder-quote{
+    font-family:'Big Shoulders Display',sans-serif; font-weight:600; text-transform:none;
+    font-size:clamp(22px,2.6vw,30px); line-height:1.28; color:var(--ink); margin:0 0 22px;
+  }
+  .founder-quote .brass{color:var(--brass-bright);}
+  .attribution{font-size:13px; color:var(--ink-muted);}
+  .attribution .name{color:var(--brass); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.05em;}
+
+  /* origin story two-col */
+  .story-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start;}
+  @media (max-width:880px){ .story-grid{grid-template-columns:1fr; gap:36px;} }
+  .story-copy p{color:var(--ink-muted); font-size:16px; margin:0 0 20px;}
+  .story-copy strong{color:var(--ink); font-weight:600;}
+  .story-labels{display:flex; flex-direction:column; gap:0;}
+  .story-labels .item{padding:18px 0; border-top:1px solid var(--line);}
+  .story-labels .item:last-child{border-bottom:1px solid var(--line);}
+  .story-labels .tag{font-family:'IBM Plex Mono',monospace; color:var(--brass); font-size:11px; letter-spacing:0.1em; display:block; margin-bottom:6px;}
+  .story-labels .val{font-size:14.5px; color:var(--ink-muted);}
+
+  /* pillars */
+  .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);}
+  @media (max-width:880px){ .pillars{grid-template-columns:1fr;} }
+  .pillar{background:var(--bg); padding:32px 28px; display:flex; flex-direction:column; gap:12px;}
+  .pillar-num{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--brass);}
+  .pillar h3{font-size:18px; margin:0; font-weight:600;}
+  .pillar p{color:var(--ink-muted); font-size:14.5px; margin:0;}
+
+  /* response timeline */
+  .resp-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column;}
+  .resp-list li{
+    display:grid; grid-template-columns:64px 1fr; gap:24px;
+    padding:24px 0; border-top:1px solid var(--line);
+  }
+  .resp-list li:last-child{border-bottom:1px solid var(--line);}
+  .resp-num{font-family:'Big Shoulders Display',sans-serif; font-size:30px; color:var(--brass); font-weight:700;}
+  .resp-list h4{margin:0 0 6px; font-size:16.5px; font-weight:600;}
+  .resp-list p{margin:0; color:var(--ink-muted); font-size:14.5px; max-width:60ch;}
+
+  .cta-band{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;}
+  .cta-band h2{margin:0;}
+  .btn-primary{
+    background:var(--brass); color:#141414; font-weight:600; padding:14px 26px;
+    border-radius:2px; text-decoration:none; font-size:14px; letter-spacing:0.03em;
+    display:inline-block; border:1px solid var(--brass); transition:transform .15s ease, background .2s ease;
+  }
+  .btn-primary:hover{background:var(--brass-bright); transform:translateY(-1px);}
+
+  footer{border-top:1px solid var(--line); padding:36px 0; position:relative; z-index:1;}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .foot-row .mono{font-size:12px; color:var(--ink-faint);}
+</style>
+</head>
+<body>
+
+<div class="grid-bg" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap navbar">
+    <div class="brand">
+      <a href="index.html" style="text-decoration:none; color:inherit; display:flex; align-items:baseline; gap:10px;">
+        <span class="brand-mark display">A<span>&amp;</span>T SOLUTIONS</span>
+        <span class="brand-sub mono">TACTICAL TRAINING · SECURITY CONSULTING</span>
+      </a>
+    </div>
+    <nav class="links">
+      <a href="who-we-are.html" class="active">Who We Are</a>
+      <a href="programs.html">Training Programs</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#contact" class="nav-cta">Contact</a>
+    </nav>
+    <button class="menu-btn mono" aria-label="Menu">MENU</button>
+  </div>
+</header>
+
+<main>
+  <section class="phero wrap" style="border-top:none;">
+    <p class="eyebrow mono">WHO WE ARE</p>
+    <h1 class="display">Two friends. One mission.</h1>
+    <p class="lede">A&amp;T Solutions was founded by two lifelong friends who turned years of real-world operational experience into training that helps civilian communities prevent attacks and improve public safety.</p>
+  </section>
+
+  <section id="origin" class="wrap">
+    <div class="story-grid">
+      <div>
+        <div class="bracket-frame">
+          <div class="bc2"></div>
+          <p class="founder-quote">"We took the operational knowledge and real-world experience we'd built over the years, and turned it into something communities anywhere could actually use."</p>
+          <div class="attribution"><span class="name mono">TOMER OREN</span> — Co-Founder, A&amp;T Solutions</div>
+        </div>
+      </div>
+      <div class="story-copy">
+        <span class="kicker mono">ORIGIN</span>
+        <h2 style="margin-bottom:22px;">Built by two people who've done the work.</h2>
+        <p><strong>Tomer and Amit have known each other since childhood.</strong> Both built years of hands-on experience in operational and security roles within high-pressure, real-world environments — Tomer went on to work as an instructor, training military and security forces internationally.</p>
+        <p>As Amit's path in that world was drawing to a close, the two of them saw an opportunity: to take the operational knowledge and real-world experience they had built over the years and pass it on — not to other professionals, but to civilian communities.</p>
+        <p>Together, they founded <strong>A&amp;T Tactical Solutions</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="mission" class="wrap">
+    <div class="section-head">
+      <span class="kicker mono">OUR MISSION</span>
+      <h2>Prevent incidents. Prepare communities. Save lives.</h2>
+      <p>Our mission is to take real operational knowledge and experience and pass it on to civilian communities around the world — helping prevent attacks and improve public safety.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-num mono">PREVENT</span>
+        <h3>Stop incidents before they start</h3>
+        <p>We focus first on prevention — effective planning, situational awareness, and making optimal use of the surrounding environment.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num mono">PREPARE</span>
+        <h3>Build local response capability</h3>
+        <p>Beyond training individuals, we help establish local rapid-response and emergency preparedness teams where they're needed.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num mono">PROTECT</span>
+        <h3>Reduce chaos, save lives</h3>
+        <p>When incidents do happen, our training is built to increase confidence, reduce chaos, and improve outcomes for everyone involved.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="response" class="wrap">
+    <div class="section-head">
+      <span class="kicker mono">WHEN AN INCIDENT OCCURS</span>
+      <h2>Training built for the moments that matter most.</h2>
+      <p>Should an incident occur, our training is designed to carry people through it — calmly, effectively, and with the best possible outcome.</p>
+    </div>
+    <ul class="resp-list">
+      <li>
+        <span class="resp-num display">01</span>
+        <div><h4>Confident, effective response</h4><p>Responders are trained to manage high-stress situations with minimal chaos and minimal casualties.</p></div>
+      </li>
+      <li>
+        <span class="resp-num display">02</span>
+        <div><h4>Immediate lifesaving care</h4><p>If injuries occur, responders can provide immediate lifesaving medical care while the incident is still unfolding.</p></div>
+      </li>
+      <li>
+        <span class="resp-num display">03</span>
+        <div><h4>Proper evacuation &amp; coordination</h4><p>We teach correct casualty evacuation procedures and coordination with emergency services and authorities.</p></div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="approach" class="wrap">
+    <div class="story-grid">
+      <div class="story-copy">
+        <span class="kicker mono">OUR APPROACH</span>
+        <h2 style="margin-bottom:22px;">Every city and community is different — so every program is too.</h2>
+        <p>We offer a wide range of training programs, and we understand that every city, community, and organization faces different conditions and threats. That's why we tailor every training solution to each client's specific needs and requirements — never a one-size-fits-all course.</p>
+        <p>We believe in the value of our work, and we're confident it can make a meaningful, lasting impact on the communities we train: improving preparedness, and ultimately, saving lives.</p>
+      </div>
+      <div class="story-labels">
+        <div class="item">
+          <span class="tag mono">INSTRUCTORS</span>
+          <span class="val">Only the highest-quality instructors — each one a highly experienced professional with extensive operational experience and a proven background in training and leadership</span>
+        </div>
+        <div class="item">
+          <span class="tag mono">METHOD</span>
+          <span class="val">Every program is built around the client's actual environment, risks, and needs — not a standard template</span>
+        </div>
+        <div class="item">
+          <span class="tag mono">SCOPE</span>
+          <span class="val">From individual and community training to full local rapid-response team formation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" class="wrap" style="padding-bottom:96px;">
+    <div class="cta-band">
+      <h2>Let's talk about your community.</h2>
+      <a class="btn-primary" href="index.html#contact">Request a Consultation</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="mono">© <span id="year"></span> A&amp;T SOLUTIONS — SECURITY CONSULTING &amp; TRAINING</span>
+    <span class="mono">WORKING WORLDWIDE</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
