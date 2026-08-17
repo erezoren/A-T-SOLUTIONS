@@ -1,0 +1,668 @@
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/CNAME.ready /mnt/data/A-T-SOLUTIONS-seo/CNAME.ready
+--- /mnt/data/A-T-SOLUTIONS-baseline/CNAME.ready	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/CNAME.ready	2026-08-17 19:09:17.070612853 +0000
+@@ -0,0 +1 @@
++attacticalsolutions.com
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/SEO-SETUP.md /mnt/data/A-T-SOLUTIONS-seo/SEO-SETUP.md
+--- /mnt/data/A-T-SOLUTIONS-baseline/SEO-SETUP.md	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/SEO-SETUP.md	2026-08-17 19:09:17.070719742 +0000
+@@ -0,0 +1,74 @@
++# A&T Solutions SEO deployment notes
++
++## What this package changes
++
++The visible page body/layout is unchanged. SEO work is limited to page `<head>` metadata plus root support files.
++
++### Implemented now
++- Unique keyword-focused `<title>` and meta descriptions for all 3 pages.
++- Explicit `robots` meta directives.
++- Canonical URLs for the currently live GitHub Pages site.
++- Open Graph and Twitter Card metadata.
++- JSON-LD structured data: WebSite, Organization, WebPage/AboutPage/CollectionPage, BreadcrumbList, OfferCatalog and relevant Service items.
++- `robots.txt` and `sitemap.xml`.
++- Crawl-friendly internal HTML links already present in the original pages are preserved.
++- Lightweight SVG favicon and `.nojekyll`.
++- Contact form intentionally left unchanged.
++
++## Target keyword plan
++
++### Home (`index.html`)
++Primary: security consulting; tactical training; security training; risk assessment.
++Secondary: civilian critical response training; rapid-response teams; threat assessment; emergency preparedness; on-site security assessment; global security consulting.
++
++### Training Programs (`programs.html`)
++Primary: civilian critical response training; tactical training programs.
++Secondary: situational awareness training; threat and vulnerability assessment; self-defense training; tactical medicine training; scene management training; CQB training; active shooter drills; non-lethal response training; civilian emergency preparedness.
++
++### Who We Are (`who-we-are.html`)
++Primary: security training experts; tactical training company; security consultants.
++Secondary: civilian preparedness; community security training; rapid-response team formation; experienced security instructors; operational security experience.
++
++No `meta keywords` tag is added; modern Google Search does not use it for ranking. The keyword plan is implemented through relevant page titles/descriptions and the existing page copy, which already naturally contains these concepts.
++
++## Current canonical URL vs future domain
++
++Until the custom domain actually serves this site, canonical/sitemap URLs point to:
++
++`https://erezoren.github.io/A-T-SOLUTIONS/`
++
++Future domain:
++
++`https://attacticalsolutions.com/`
++
++After DNS and GitHub Pages custom-domain setup are ready, run from the repo root:
++
++```bash
++python3 switch-to-domain.py
++```
++
++That rewrites canonical/Open Graph/JSON-LD/robots/sitemap URLs and activates the prepared `CNAME`. Commit and push the changes, then enable **Enforce HTTPS** in GitHub Pages.
++
++## Google Search Console
++
++This cannot be completed without ownership verification in the user's Google account. Once the live URL is deployed:
++1. Add/verify the property in Google Search Console. For the future domain, prefer a Domain property.
++2. Submit `https://erezoren.github.io/A-T-SOLUTIONS/sitemap.xml` now; after domain migration submit `https://attacticalsolutions.com/sitemap.xml`.
++3. Use URL Inspection for the home page, `programs.html`, and `who-we-are.html`, then request indexing.
++4. After the custom domain is live, keep the GitHub Pages version redirected/canonicalized to the custom domain through GitHub Pages' custom-domain behavior.
++
++## Analytics
++
++No analytics script is inserted because a real GA4 Measurement ID (or another analytics account/site ID) was not provided; inventing one would not collect data. When you have a GA4 Measurement ID such as `G-XXXXXXXXXX`, add the official Google tag to all three pages.
++
++## Validation after deploy
++- Confirm all 3 URLs return HTTP 200.
++- Check `robots.txt` and `sitemap.xml` from the public site.
++- Validate JSON-LD using Google's Rich Results Test and Schema.org validator.
++- Run PageSpeed Insights/Core Web Vitals.
++- Confirm canonical URL in Search Console URL Inspection.
++
++## Suggested next organic SEO work (does change/add visible content, so intentionally NOT included)
++- Add dedicated landing pages for major intent clusters (security consulting, risk assessment, civilian critical-response training, community/security-team training).
++- Add proof/case studies, instructor credentials, FAQs, client sectors, and useful evergreen articles.
++- Build legitimate relevant backlinks/mentions from partner organizations, training venues, industry directories, and client sites.
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/VALIDATION.txt /mnt/data/A-T-SOLUTIONS-seo/VALIDATION.txt
+--- /mnt/data/A-T-SOLUTIONS-baseline/VALIDATION.txt	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/VALIDATION.txt	2026-08-17 19:09:17.070831378 +0000
+@@ -0,0 +1,4 @@
++BODY SHA-256 validation (original == optimized):
++index.html: 22544e73df5a196d49aaad60c56b2b2b26f26000aaa62a589cb6383347083e5e == 22544e73df5a196d49aaad60c56b2b2b26f26000aaa62a589cb6383347083e5e -> True
++who-we-are.html: 015f7302dd4e6912068380bf0e1d4d59f4757a2188eaccdea7e8afd3a240d4ff == 015f7302dd4e6912068380bf0e1d4d59f4757a2188eaccdea7e8afd3a240d4ff -> True
++programs.html: 15c6f015211f990f5e0021551c25e4394772a935833f704e1f51ce5445e11e85 == 15c6f015211f990f5e0021551c25e4394772a935833f704e1f51ce5445e11e85 -> True
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/favicon.svg /mnt/data/A-T-SOLUTIONS-seo/favicon.svg
+--- /mnt/data/A-T-SOLUTIONS-baseline/favicon.svg	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/favicon.svg	2026-08-17 19:09:17.070560795 +0000
+@@ -0,0 +1,5 @@
++<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
++  <rect width="64" height="64" rx="8" fill="#0C0E10"/>
++  <path d="M10 45L24 17h7l14 28h-8l-3-7H21l-3 7h-8zm14-13h8l-4-9-4 9z" fill="#ECE8E0"/>
++  <path d="M43 20h5v25h-5z" fill="#C6A15B"/>
++</svg>
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/index.html /mnt/data/A-T-SOLUTIONS-seo/index.html
+--- /mnt/data/A-T-SOLUTIONS-baseline/index.html	2026-08-17 19:09:35.149428268 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/index.html	2026-08-17 19:09:17.067272781 +0000
+@@ -3,8 +3,123 @@
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-<title>A&T Solutions — Security Consulting &amp; Training</title>
+-<meta name="description" content="A&T Solutions is a boutique security consulting and training firm built around a highly experienced team of instructors with extensive training, security, and operational field experience, operating globally.">
++<!-- SEO: metadata, canonicalization and structured data -->
++<title>Security Consulting &amp; Tactical Training | A&amp;T Solutions</title>
++<meta name="description" content="A&amp;T Solutions provides security consulting, risk assessment, tactical training, civilian critical-response training, and rapid-response capability worldwide.">
++<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
++<meta name="author" content="A&amp;T Solutions">
++<meta name="theme-color" content="#0C0E10">
++<link rel="canonical" href="https://erezoren.github.io/A-T-SOLUTIONS/">
++<link rel="icon" href="favicon.svg" type="image/svg+xml">
++
++<meta property="og:type" content="website">
++<meta property="og:site_name" content="A&amp;T Solutions">
++<meta property="og:title" content="Security Consulting &amp; Tactical Training | A&amp;T Solutions">
++<meta property="og:description" content="A&amp;T Solutions provides security consulting, risk assessment, tactical training, civilian critical-response training, and rapid-response capability worldwide.">
++<meta property="og:url" content="https://erezoren.github.io/A-T-SOLUTIONS/">
++<meta property="og:locale" content="en_US">
++
++<meta name="twitter:card" content="summary">
++<meta name="twitter:title" content="Security Consulting &amp; Tactical Training | A&amp;T Solutions">
++<meta name="twitter:description" content="A&amp;T Solutions provides security consulting, risk assessment, tactical training, civilian critical-response training, and rapid-response capability worldwide.">
++
++<script type="application/ld+json">
++{
++  "@context": "https://schema.org",
++  "@graph": [
++    {
++      "@type": "WebSite",
++      "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#website",
++      "url": "https://erezoren.github.io/A-T-SOLUTIONS/",
++      "name": "A&T Solutions",
++      "alternateName": "A&T Tactical Solutions",
++      "publisher": {
++        "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++      },
++      "inLanguage": "en"
++    },
++    {
++      "@type": "Organization",
++      "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization",
++      "name": "A&T Solutions",
++      "alternateName": "A&T Tactical Solutions",
++      "url": "https://erezoren.github.io/A-T-SOLUTIONS/",
++      "description": "Security consulting and tactical training firm providing risk assessment, civilian critical-response training, and rapid-response capability worldwide.",
++      "email": "attsolutions02@gmail.com",
++      "telephone": "+972505575815",
++      "areaServed": "Worldwide",
++      "contactPoint": {
++        "@type": "ContactPoint",
++        "contactType": "sales and consultation",
++        "email": "attsolutions02@gmail.com",
++        "telephone": "+972505575815",
++        "availableLanguage": [
++          "English"
++        ]
++      },
++      "knowsAbout": [
++        "Security consulting",
++        "Risk assessment",
++        "Tactical training",
++        "Civilian critical response training",
++        "Threat assessment",
++        "Situational awareness",
++        "Tactical medicine",
++        "Rapid-response team formation"
++      ],
++      "hasOfferCatalog": {
++        "@type": "OfferCatalog",
++        "name": "Security Consulting and Training Services",
++        "itemListElement": [
++          {
++            "@type": "Offer",
++            "itemOffered": {
++              "@type": "Service",
++              "name": "Instruction & Training",
++              "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html",
++              "description": "Tailored tactical and civilian critical-response training built around an on-site needs assessment."
++            }
++          },
++          {
++            "@type": "Offer",
++            "itemOffered": {
++              "@type": "Service",
++              "name": "Security Consulting & Risk Assessment",
++              "url": "https://erezoren.github.io/A-T-SOLUTIONS/#services",
++              "description": "On-site risk assessment and security consulting for venues, events, communities, and organizations."
++            }
++          },
++          {
++            "@type": "Offer",
++            "itemOffered": {
++              "@type": "Service",
++              "name": "Rapid-Response & Logistics",
++              "url": "https://erezoren.github.io/A-T-SOLUTIONS/#services",
++              "description": "Rapid-response team formation, professional content development, and logistics support."
++            }
++          }
++        ]
++      }
++    },
++    {
++      "@type": "WebPage",
++      "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#webpage",
++      "url": "https://erezoren.github.io/A-T-SOLUTIONS/",
++      "name": "Security Consulting & Tactical Training | A&T Solutions",
++      "description": "A&T Solutions provides security consulting, risk assessment, tactical training, civilian critical-response training, and rapid-response capability worldwide.",
++      "isPartOf": {
++        "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#website"
++      },
++      "about": {
++        "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++      },
++      "inLanguage": "en"
++    }
++  ]
++}
++</script>
++<!-- /SEO -->
++
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/programs.html /mnt/data/A-T-SOLUTIONS-seo/programs.html
+--- /mnt/data/A-T-SOLUTIONS-baseline/programs.html	2026-08-17 19:09:35.151496907 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/programs.html	2026-08-17 19:09:17.070351394 +0000
+@@ -3,8 +3,220 @@
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-<title>Training Programs — A&T Solutions</title>
+-<meta name="description" content="A&T Solutions civilian critical response training programs: tactical response, scene management, threat assessment, tactical medicine, and more.">
++<!-- SEO: metadata, canonicalization and structured data -->
++<title>Civilian Critical Response &amp; Tactical Training | A&amp;T Solutions</title>
++<meta name="description" content="Civilian critical-response and tactical training covering threat assessment, situational awareness, self-defense, scene management, tactical medicine, CQB, and more.">
++<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
++<meta name="author" content="A&amp;T Solutions">
++<meta name="theme-color" content="#0C0E10">
++<link rel="canonical" href="https://erezoren.github.io/A-T-SOLUTIONS/programs.html">
++<link rel="icon" href="favicon.svg" type="image/svg+xml">
++
++<meta property="og:type" content="website">
++<meta property="og:site_name" content="A&amp;T Solutions">
++<meta property="og:title" content="Civilian Critical Response &amp; Tactical Training | A&amp;T Solutions">
++<meta property="og:description" content="Civilian critical-response and tactical training covering threat assessment, situational awareness, self-defense, scene management, tactical medicine, CQB, and more.">
++<meta property="og:url" content="https://erezoren.github.io/A-T-SOLUTIONS/programs.html">
++<meta property="og:locale" content="en_US">
++
++<meta name="twitter:card" content="summary">
++<meta name="twitter:title" content="Civilian Critical Response &amp; Tactical Training | A&amp;T Solutions">
++<meta name="twitter:description" content="Civilian critical-response and tactical training covering threat assessment, situational awareness, self-defense, scene management, tactical medicine, CQB, and more.">
++
++<script type="application/ld+json">
++{
++  "@context": "https://schema.org",
++  "@graph": [
++    {
++      "@type": "CollectionPage",
++      "@id": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html#webpage",
++      "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html",
++      "name": "Civilian Critical Response & Tactical Training | A&T Solutions",
++      "description": "Civilian critical-response and tactical training covering threat assessment, situational awareness, self-defense, scene management, tactical medicine, CQB, and more.",
++      "isPartOf": {
++        "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#website"
++      },
++      "about": {
++        "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++      },
++      "breadcrumb": {
++        "@id": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html#breadcrumb"
++      },
++      "mainEntity": {
++        "@id": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html#training-programs"
++      },
++      "inLanguage": "en"
++    },
++    {
++      "@type": "BreadcrumbList",
++      "@id": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html#breadcrumb",
++      "itemListElement": [
++        {
++          "@type": "ListItem",
++          "position": 1,
++          "name": "Home",
++          "item": "https://erezoren.github.io/A-T-SOLUTIONS/"
++        },
++        {
++          "@type": "ListItem",
++          "position": 2,
++          "name": "Training Programs",
++          "item": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++        }
++      ]
++    },
++    {
++      "@type": "ItemList",
++      "@id": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html#training-programs",
++      "name": "A&T Solutions Training Programs",
++      "itemListElement": [
++        {
++          "@type": "ListItem",
++          "position": 1,
++          "item": {
++            "@type": "Service",
++            "name": "Tactical Response",
++            "description": "Armed and non-lethal response and threat discrimination in crowded civilian areas.",
++            "provider": {
++              "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++            },
++            "areaServed": "Worldwide",
++            "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++          }
++        },
++        {
++          "@type": "ListItem",
++          "position": 2,
++          "item": {
++            "@type": "Service",
++            "name": "Scene Management",
++            "description": "Safe zones, evacuation routes, and scene control until authorities arrive.",
++            "provider": {
++              "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++            },
++            "areaServed": "Worldwide",
++            "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++          }
++        },
++        {
++          "@type": "ListItem",
++          "position": 3,
++          "item": {
++            "@type": "Service",
++            "name": "Vehicle & Mobility",
++            "description": "Vehicle-based protection, evacuation, and urban mobility tactics.",
++            "provider": {
++              "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++            },
++            "areaServed": "Worldwide",
++            "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++          }
++        },
++        {
++          "@type": "ListItem",
++          "position": 4,
++          "item": {
++            "@type": "Service",
++            "name": "Drone & Technology",
++            "description": "Situational awareness and rapid intelligence gathering using modern technology.",
++            "provider": {
++              "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++            },
++            "areaServed": "Worldwide",
++            "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++          }
++        },
++        {
++          "@type": "ListItem",
++          "position": 5,
++          "item": {
++            "@type": "Service",
++            "name": "Close Quarters & Defensive",
++            "description": "Unarmed self-defense, CQB principles, weapon retention, and suspect control.",
++            "provider": {
++              "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++            },
++            "areaServed": "Worldwide",
++            "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++          }
++        },
++        {
++          "@type": "ListItem",
++          "position": 6,
++          "item": {
++            "@type": "Service",
++            "name": "Tactical Medicine",
++            "description": "Bleeding control, casualty evacuation, and basic first aid.",
++            "provider": {
++              "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++            },
++            "areaServed": "Worldwide",
++            "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++          }
++        },
++        {
++          "@type": "ListItem",
++          "position": 7,
++          "item": {
++            "@type": "Service",
++            "name": "Threat & Vulnerability Assessment",
++            "description": "Identifying weak points, pre-attack indicators, and prevention opportunities.",
++            "provider": {
++              "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++            },
++            "areaServed": "Worldwide",
++            "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++          }
++        },
++        {
++          "@type": "ListItem",
++          "position": 8,
++          "item": {
++            "@type": "Service",
++            "name": "Non-Lethal & Less-Lethal Systems",
++            "description": "Training in non-lethal and less-lethal response options.",
++            "provider": {
++              "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++            },
++            "areaServed": "Worldwide",
++            "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++          }
++        },
++        {
++          "@type": "ListItem",
++          "position": 9,
++          "item": {
++            "@type": "Service",
++            "name": "Basic Medical Training",
++            "description": "Bleeding control, CPR basics, and casualty care for non-medical civilians.",
++            "provider": {
++              "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++            },
++            "areaServed": "Worldwide",
++            "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++          }
++        },
++        {
++          "@type": "ListItem",
++          "position": 10,
++          "item": {
++            "@type": "Service",
++            "name": "Situational Awareness & Self-Defense",
++            "description": "Situational awareness, de-escalation, and unarmed self-defense fundamentals.",
++            "provider": {
++              "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++            },
++            "areaServed": "Worldwide",
++            "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html"
++          }
++        }
++      ]
++    }
++  ]
++}
++</script>
++<!-- /SEO -->
++
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/robots.txt /mnt/data/A-T-SOLUTIONS-seo/robots.txt
+--- /mnt/data/A-T-SOLUTIONS-baseline/robots.txt	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/robots.txt	2026-08-17 19:09:17.070446375 +0000
+@@ -0,0 +1,4 @@
++User-agent: *
++Allow: /
++
++Sitemap: https://erezoren.github.io/A-T-SOLUTIONS/sitemap.xml
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/seo-config.json /mnt/data/A-T-SOLUTIONS-seo/seo-config.json
+--- /mnt/data/A-T-SOLUTIONS-baseline/seo-config.json	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/seo-config.json	2026-08-17 19:09:17.070786912 +0000
+@@ -0,0 +1,18 @@
++{
++  "current_base_url": "https://erezoren.github.io/A-T-SOLUTIONS/",
++  "future_base_url": "https://attacticalsolutions.com/",
++  "pages": {
++    "index.html": {
++      "title": "Security Consulting & Tactical Training | A&T Solutions",
++      "description": "A&T Solutions provides security consulting, risk assessment, tactical training, civilian critical-response training, and rapid-response capability worldwide."
++    },
++    "who-we-are.html": {
++      "title": "About A&T Solutions | Security & Tactical Training Experts",
++      "description": "Meet A&T Solutions, experienced security practitioners delivering civilian preparedness, critical-response training, and tailored security consulting worldwide."
++    },
++    "programs.html": {
++      "title": "Civilian Critical Response & Tactical Training | A&T Solutions",
++      "description": "Civilian critical-response and tactical training covering threat assessment, situational awareness, self-defense, scene management, tactical medicine, CQB, and more."
++    }
++  }
++}
+\ No newline at end of file
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/sitemap.xml /mnt/data/A-T-SOLUTIONS-seo/sitemap.xml
+--- /mnt/data/A-T-SOLUTIONS-baseline/sitemap.xml	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/sitemap.xml	2026-08-17 19:09:17.070521937 +0000
+@@ -0,0 +1,15 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
++  <url>
++    <loc>https://erezoren.github.io/A-T-SOLUTIONS/</loc>
++    <lastmod>2026-08-17</lastmod>
++  </url>
++  <url>
++    <loc>https://erezoren.github.io/A-T-SOLUTIONS/who-we-are.html</loc>
++    <lastmod>2026-08-17</lastmod>
++  </url>
++  <url>
++    <loc>https://erezoren.github.io/A-T-SOLUTIONS/programs.html</loc>
++    <lastmod>2026-08-17</lastmod>
++  </url>
++</urlset>
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/switch-to-domain.py /mnt/data/A-T-SOLUTIONS-seo/switch-to-domain.py
+--- /mnt/data/A-T-SOLUTIONS-baseline/switch-to-domain.py	1970-01-01 00:00:00.000000000 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/switch-to-domain.py	2026-08-17 19:09:17.070647004 +0000
+@@ -0,0 +1,20 @@
++#!/usr/bin/env python3
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parent
++OLD = "https://erezoren.github.io/A-T-SOLUTIONS/"
++NEW = "https://attacticalsolutions.com/"
++
++for name in ["index.html", "who-we-are.html", "programs.html", "robots.txt", "sitemap.xml"]:
++    path = ROOT / name
++    text = path.read_text(encoding="utf-8")
++    path.write_text(text.replace(OLD, NEW), encoding="utf-8")
++
++ready = ROOT / "CNAME.ready"
++cname = ROOT / "CNAME"
++if ready.exists():
++    cname.write_text(ready.read_text(encoding="utf-8"), encoding="utf-8")
++    ready.unlink()
++
++print("Switched canonical, Open Graph, structured-data, robots and sitemap URLs to", NEW)
++print("Activated CNAME for attacticalsolutions.com")
+diff -ruN /mnt/data/A-T-SOLUTIONS-baseline/who-we-are.html /mnt/data/A-T-SOLUTIONS-seo/who-we-are.html
+--- /mnt/data/A-T-SOLUTIONS-baseline/who-we-are.html	2026-08-17 19:09:35.150440119 +0000
++++ /mnt/data/A-T-SOLUTIONS-seo/who-we-are.html	2026-08-17 19:09:17.068491906 +0000
+@@ -3,8 +3,133 @@
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-<title>Who We Are — A&T Solutions</title>
+-<meta name="description" content="A&T Solutions was founded by two lifelong friends who turned years of real-world operational experience into training that helps civilian communities prevent attacks and improve public safety.">
++<!-- SEO: metadata, canonicalization and structured data -->
++<title>About A&amp;T Solutions | Security &amp; Tactical Training Experts</title>
++<meta name="description" content="Meet A&amp;T Solutions, experienced security practitioners delivering civilian preparedness, critical-response training, and tailored security consulting worldwide.">
++<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
++<meta name="author" content="A&amp;T Solutions">
++<meta name="theme-color" content="#0C0E10">
++<link rel="canonical" href="https://erezoren.github.io/A-T-SOLUTIONS/who-we-are.html">
++<link rel="icon" href="favicon.svg" type="image/svg+xml">
++
++<meta property="og:type" content="website">
++<meta property="og:site_name" content="A&amp;T Solutions">
++<meta property="og:title" content="About A&amp;T Solutions | Security &amp; Tactical Training Experts">
++<meta property="og:description" content="Meet A&amp;T Solutions, experienced security practitioners delivering civilian preparedness, critical-response training, and tailored security consulting worldwide.">
++<meta property="og:url" content="https://erezoren.github.io/A-T-SOLUTIONS/who-we-are.html">
++<meta property="og:locale" content="en_US">
++
++<meta name="twitter:card" content="summary">
++<meta name="twitter:title" content="About A&amp;T Solutions | Security &amp; Tactical Training Experts">
++<meta name="twitter:description" content="Meet A&amp;T Solutions, experienced security practitioners delivering civilian preparedness, critical-response training, and tailored security consulting worldwide.">
++
++<script type="application/ld+json">
++{
++  "@context": "https://schema.org",
++  "@graph": [
++    {
++      "@type": "Organization",
++      "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization",
++      "name": "A&T Solutions",
++      "alternateName": "A&T Tactical Solutions",
++      "url": "https://erezoren.github.io/A-T-SOLUTIONS/",
++      "description": "Security consulting and tactical training firm providing risk assessment, civilian critical-response training, and rapid-response capability worldwide.",
++      "email": "attsolutions02@gmail.com",
++      "telephone": "+972505575815",
++      "areaServed": "Worldwide",
++      "contactPoint": {
++        "@type": "ContactPoint",
++        "contactType": "sales and consultation",
++        "email": "attsolutions02@gmail.com",
++        "telephone": "+972505575815",
++        "availableLanguage": [
++          "English"
++        ]
++      },
++      "knowsAbout": [
++        "Security consulting",
++        "Risk assessment",
++        "Tactical training",
++        "Civilian critical response training",
++        "Threat assessment",
++        "Situational awareness",
++        "Tactical medicine",
++        "Rapid-response team formation"
++      ],
++      "hasOfferCatalog": {
++        "@type": "OfferCatalog",
++        "name": "Security Consulting and Training Services",
++        "itemListElement": [
++          {
++            "@type": "Offer",
++            "itemOffered": {
++              "@type": "Service",
++              "name": "Instruction & Training",
++              "url": "https://erezoren.github.io/A-T-SOLUTIONS/programs.html",
++              "description": "Tailored tactical and civilian critical-response training built around an on-site needs assessment."
++            }
++          },
++          {
++            "@type": "Offer",
++            "itemOffered": {
++              "@type": "Service",
++              "name": "Security Consulting & Risk Assessment",
++              "url": "https://erezoren.github.io/A-T-SOLUTIONS/#services",
++              "description": "On-site risk assessment and security consulting for venues, events, communities, and organizations."
++            }
++          },
++          {
++            "@type": "Offer",
++            "itemOffered": {
++              "@type": "Service",
++              "name": "Rapid-Response & Logistics",
++              "url": "https://erezoren.github.io/A-T-SOLUTIONS/#services",
++              "description": "Rapid-response team formation, professional content development, and logistics support."
++            }
++          }
++        ]
++      }
++    },
++    {
++      "@type": "AboutPage",
++      "@id": "https://erezoren.github.io/A-T-SOLUTIONS/who-we-are.html#webpage",
++      "url": "https://erezoren.github.io/A-T-SOLUTIONS/who-we-are.html",
++      "name": "About A&T Solutions | Security & Tactical Training Experts",
++      "description": "Meet A&T Solutions, experienced security practitioners delivering civilian preparedness, critical-response training, and tailored security consulting worldwide.",
++      "isPartOf": {
++        "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#website"
++      },
++      "about": {
++        "@id": "https://erezoren.github.io/A-T-SOLUTIONS/#organization"
++      },
++      "breadcrumb": {
++        "@id": "https://erezoren.github.io/A-T-SOLUTIONS/who-we-are.html#breadcrumb"
++      },
++      "inLanguage": "en"
++    },
++    {
++      "@type": "BreadcrumbList",
++      "@id": "https://erezoren.github.io/A-T-SOLUTIONS/who-we-are.html#breadcrumb",
++      "itemListElement": [
++        {
++          "@type": "ListItem",
++          "position": 1,
++          "name": "Home",
++          "item": "https://erezoren.github.io/A-T-SOLUTIONS/"
++        },
++        {
++          "@type": "ListItem",
++          "position": 2,
++          "name": "Who We Are",
++          "item": "https://erezoren.github.io/A-T-SOLUTIONS/who-we-are.html"
++        }
++      ]
++    }
++  ]
++}
++</script>
++<!-- /SEO -->
++
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">

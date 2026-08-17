@@ -1,0 +1,18 @@
+{
+  "current_base_url": "https://erezoren.github.io/A-T-SOLUTIONS/",
+  "future_base_url": "https://attacticalsolutions.com/",
+  "pages": {
+    "index.html": {
+      "title": "Security Consulting & Tactical Training | A&T Solutions",
+      "description": "A&T Solutions provides security consulting, risk assessment, tactical training, civilian critical-response training, and rapid-response capability worldwide."
+    },
+    "who-we-are.html": {
+      "title": "About A&T Solutions | Security & Tactical Training Experts",
+      "description": "Meet A&T Solutions, experienced security practitioners delivering civilian preparedness, critical-response training, and tailored security consulting worldwide."
+    },
+    "programs.html": {
+      "title": "Civilian Critical Response & Tactical Training | A&T Solutions",
+      "description": "Civilian critical-response and tactical training covering threat assessment, situational awareness, self-defense, scene management, tactical medicine, CQB, and more."
+    }
+  }
+}
