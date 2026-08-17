@@ -282,7 +282,23 @@
   .nav-cta{border:1px solid var(--brass); color:var(--brass-bright) !important; padding:8px 16px; border-radius:2px;}
   .nav-cta:hover{background:var(--brass); color:var(--bg) !important;}
   .menu-btn{display:none; background:none; border:1px solid var(--line); color:var(--ink); padding:8px 10px; border-radius:2px;}
-  @media (max-width:820px){ nav.links{display:none;} .menu-btn{display:block;} }
+  @media (max-width:820px){
+    .navbar{position:relative; flex-wrap:wrap;}
+    nav.links{
+      display:none;
+      width:100%;
+      flex-direction:column;
+      align-items:stretch;
+      gap:0;
+      margin-top:14px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+    }
+    nav.links.is-open{display:flex;}
+    nav.links a{padding:11px 0;}
+    nav.links .nav-cta{margin-top:6px; text-align:center;}
+    .menu-btn{display:block; cursor:pointer;}
+  }
 
   /* HERO */
   .phero{position:relative; z-index:1; padding:88px 0 56px;}
@@ -388,14 +404,14 @@
         <span class="brand-sub mono">TACTICAL TRAINING · SECURITY CONSULTING</span>
       </a>
     </div>
-    <nav class="links">
+    <nav class="links" id="site-nav">
       <a href="who-we-are.html">Who We Are</a>
       <a href="index.html#about">About</a>
       <a href="index.html#services">Services</a>
       <a href="programs.html" class="active">Training Programs</a>
       <a href="index.html#contact" class="nav-cta">Contact</a>
     </nav>
-    <button class="menu-btn mono" aria-label="Menu">MENU</button>
+    <button class="menu-btn mono" type="button" aria-label="Menu" aria-controls="site-nav" aria-expanded="false">MENU</button>
   </div>
 </header>
 
@@ -557,6 +573,31 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  const menuButton = document.querySelector('.menu-btn');
+  const siteNav = document.querySelector('nav.links');
+
+  if (menuButton && siteNav) {
+    const closeMenu = () => {
+      siteNav.classList.remove('is-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = 'MENU';
+    };
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = siteNav.classList.toggle('is-open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.textContent = isOpen ? 'CLOSE' : 'MENU';
+    });
+
+    siteNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 820) closeMenu();
+    });
+  }
 </script>
 
 </body>

@@ -202,8 +202,21 @@
   .nav-cta:hover{background:var(--brass); color:var(--bg) !important;}
   .menu-btn{display:none; background:none; border:1px solid var(--line); color:var(--ink); padding:8px 10px; border-radius:2px;}
   @media (max-width:820px){
-    nav.links{display:none;}
-    .menu-btn{display:block;}
+    .navbar{position:relative; flex-wrap:wrap;}
+    nav.links{
+      display:none;
+      width:100%;
+      flex-direction:column;
+      align-items:stretch;
+      gap:0;
+      margin-top:14px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+    }
+    nav.links.is-open{display:flex;}
+    nav.links a{padding:11px 0;}
+    nav.links .nav-cta{margin-top:6px; text-align:center;}
+    .menu-btn{display:block; cursor:pointer;}
   }
 
   /* ---------- HERO ---------- */
@@ -387,14 +400,14 @@
       <span class="brand-mark display">A<span>&amp;</span>T SOLUTIONS</span>
       <span class="brand-sub mono">TACTICAL TRAINING · SECURITY CONSULTING</span>
     </div>
-    <nav class="links">
+    <nav class="links" id="site-nav">
       <a href="who-we-are.html">Who We Are</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="programs.html">Training Programs</a>
       <a href="#contact" class="nav-cta">Contact</a>
     </nav>
-    <button class="menu-btn mono" aria-label="Menu">MENU</button>
+    <button class="menu-btn mono" type="button" aria-label="Menu" aria-controls="site-nav" aria-expanded="false">MENU</button>
   </div>
 </header>
 
@@ -543,13 +556,13 @@
           <span>We work worldwide</span>
         </div>
       </div>
-      <form class="cform" action="mailto:attsolutions02@gmail.com" method="post" enctype="text/plain">
+      <form class="cform">
         <label for="name">Name</label>
-        <input id="name" name="name" type="text" placeholder="Your name" required>
+        <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
         <label for="org">Organization</label>
-        <input id="org" name="org" type="text" placeholder="Company or venue">
+        <input id="org" name="org" type="text" autocomplete="organization" placeholder="Company or venue">
         <label for="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="you@company.com" required>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
         <label for="message">Message</label>
         <textarea id="message" name="message" placeholder="Tell us about your security or training needs"></textarea>
         <button type="submit" class="btn-primary" style="border:1px solid var(--brass); cursor:pointer; margin-top:6px;">Send Message</button>
@@ -567,6 +580,58 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  const menuButton = document.querySelector('.menu-btn');
+  const siteNav = document.querySelector('nav.links');
+
+  if (menuButton && siteNav) {
+    const closeMenu = () => {
+      siteNav.classList.remove('is-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = 'MENU';
+    };
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = siteNav.classList.toggle('is-open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.textContent = isOpen ? 'CLOSE' : 'MENU';
+    });
+
+    siteNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 820) closeMenu();
+    });
+  }
+
+  const contactForm = document.querySelector('.cform');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', event => {
+      event.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const name = String(formData.get('name') || '').trim();
+      const organization = String(formData.get('org') || '').trim();
+      const email = String(formData.get('email') || '').trim();
+      const message = String(formData.get('message') || '').trim();
+
+      const subject = `Website inquiry from ${name}`;
+      const body = [
+        `Name: ${name}`,
+        `Organization: ${organization || 'Not provided'}`,
+        `Email: ${email}`,
+        '',
+        'Message:',
+        message || 'No message provided'
+      ].join('\n');
+
+      window.location.href =
+        `mailto:attsolutions02@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  }
 </script>
 
 </body>
